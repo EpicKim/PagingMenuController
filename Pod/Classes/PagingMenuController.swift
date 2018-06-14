@@ -52,6 +52,8 @@ open class PagingMenuController: UIViewController {
         }
     }
     
+    public var onTap: (_ index:Int) -> Void = {_ in}
+    
     fileprivate var options: PagingMenuControllerCustomizable! {
         didSet {
             cleanup()
@@ -479,6 +481,7 @@ extension PagingMenuController {
     }
     
     internal func handleTapGesture(_ recognizer: UITapGestureRecognizer) {
+        onTap(currentPage)
         guard let menuItemView = recognizer.view as? MenuItemView,
             let menuView = menuView,
             let page = menuView.menuItemViews.index(of: menuItemView),
